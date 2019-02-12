@@ -3,22 +3,22 @@ FROM alpine
 LABEL maintainer="Anton Kulikov (anton.kulikov@tsrpay.com)"
 
 RUN set -ex \
-    && apk --no-cache add su-exec
+  && apk --no-cache add su-exec
 
-ARG BITCOIN_ABC_VERSION=0.18.6
+ARG BITCOIN_ABC_VERSION=0.18.7
 ARG BITCOIN_ABC_DIR=bitcoin-abc-${BITCOIN_ABC_VERSION}
 ARG BITCOIN_ABC_DIST=bitcoin-abc-${BITCOIN_ABC_VERSION}-x86_64-linux-gnu.tar.gz
-ARG BITCOIN_ABC_SHA256=4de8e8c4679868befb3865ac23187dcb75824ccb4e29847efdb451df274bd65b
+ARG BITCOIN_ABC_SHA256=943101fc28159c10b139a97dc8939112740ba34be38fd98d413d6c7a33859132
 ARG BITCOIN_ABC_SHASUM="${BITCOIN_ABC_SHA256}  ${BITCOIN_ABC_DIST}"
 ARG BITCOIN_ABC_DATA=/home/bitcoin/.bitcoin
 
 RUN wget -O ${BITCOIN_ABC_DIST} https://download.bitcoinabc.org/${BITCOIN_ABC_VERSION}/linux/${BITCOIN_ABC_DIST} \
-    && echo "${BITCOIN_ABC_SHASUM}" | sha256sum -c \
-    && tar -xzf ${BITCOIN_ABC_DIST} \
-    && mv ${BITCOIN_ABC_DIR}/bin/bitcoind ${BITCOIN_ABC_DIR}/bin/bitcoin-cli ${BITCOIN_ABC_DIR}/bin/bitcoin-tx /usr/local/bin/ \
-    && rm -r ${BITCOIN_ABC_DIR} \
-    && rm ${BITCOIN_ABC_DIST} \
-    && addgroup -S bitcoin && adduser -S -G bitcoin bitcoin
+  && echo "${BITCOIN_ABC_SHASUM}" | sha256sum -c \
+  && tar -xzf ${BITCOIN_ABC_DIST} \
+  && mv ${BITCOIN_ABC_DIR}/bin/bitcoind ${BITCOIN_ABC_DIR}/bin/bitcoin-cli ${BITCOIN_ABC_DIR}/bin/bitcoin-tx /usr/local/bin/ \
+  && rm -r ${BITCOIN_ABC_DIR} \
+  && rm ${BITCOIN_ABC_DIST} \
+  && addgroup -S bitcoin && adduser -S -G bitcoin bitcoin
 
 # Install glibc binaries needed by bitcoin-abc
 RUN apk --no-cache --allow-untrusted -X https://apkproxy.herokuapp.com/sgerrand/alpine-pkg-glibc add glibc glibc-bin
