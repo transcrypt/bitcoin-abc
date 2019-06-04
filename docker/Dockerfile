@@ -5,10 +5,10 @@ LABEL maintainer="Anton Kulikov (anton.kulikov@tsrpay.com)"
 RUN set -ex \
   && apk --no-cache add su-exec
 
-ARG BITCOIN_ABC_VERSION=0.19.6
+ARG BITCOIN_ABC_VERSION=0.19.7
 ARG BITCOIN_ABC_DIR=bitcoin-abc-${BITCOIN_ABC_VERSION}
 ARG BITCOIN_ABC_DIST=bitcoin-abc-${BITCOIN_ABC_VERSION}-x86_64-linux-gnu.tar.gz
-ARG BITCOIN_ABC_SHA256=b84aad1c0061fcafdef1b89cb75e2fc79be8f0a872fad8b1c40eebe59652a2d2
+ARG BITCOIN_ABC_SHA256=8e311bf0fb4a0334db5cc1c7caef19ea34342f73eb44264b48b593f50cb56b22
 ARG BITCOIN_ABC_SHASUM="${BITCOIN_ABC_SHA256}  ${BITCOIN_ABC_DIST}"
 ARG BITCOIN_ABC_DATA=/home/bitcoin/.bitcoin
 
